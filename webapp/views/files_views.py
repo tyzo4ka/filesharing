@@ -1,5 +1,4 @@
 from urllib.parse import urlencode
-
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
@@ -7,9 +6,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormMixin
+
 from webapp.views.base_views import SearchFilesView
 from webapp.models import File
-from webapp.forms import FileSearchForm
+from webapp.forms import FileSearchForm, FileForm, AnonFileForm
 
 
 class IndexView(SearchFilesView):
@@ -32,33 +33,28 @@ class FileView(DetailView):
 
 class FileCreate(CreateView):
     model = File
-    fields = ['file', 'caption', 'access']
     template_name = 'file/create.html'
+    form_class = None
+
+    def get_form_class(self, form_class=None):
+        if self.request.user.is_anonymous:
+            self.form_class = AnonFileForm
+        else:
+            self.form_class = FileForm
+        return self.form_class
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.author = self.request.user
+        if self.request.user.is_anonymous:
+            self.object.author = None
+        else:
+            self.object.author = self.request.user
         self.object.save()
-        access = form.cleaned_data['access']
-        print("Accesss", access)
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
 
-
-# class FileUpdate(UpdateView):
-#     model = File
-#     template_name = 'file/update.html'
-#     fields = ['file', 'caption', 'access']
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         if not request.user.has_perm('webapp.change_file') or self.object.author != request.user.pk:
-#             raise PermissionDenied('403 Forbidden')
-#         return super().dispatch(request, *args, **kwargs)
-#
-#     def get_success_url(self):
-#         return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
 
 class FileUpdate(PermissionRequiredMixin, UpdateView):
     model = File

@@ -14,6 +14,8 @@
     </div>
     <div class="file-access">{{ file.access }}</div>
     <div class="file-download">
-        <a href="{{ file.file.url }}" class="btn btn-success">Download</a>
+        <a href="{{ file.file.url }}" class="btn btn-success mr-2">Download</a>
+        <a href="/file/{{ file.pk }}/update" class="btn btn-secondary mr-2">⚙</a>
+        <a href="/file/{{ file.pk }}/delete" class="btn btn-danger">☒</a>
     </div>
 </div>

@@ -16,6 +16,19 @@
 
 <body>
 {% block menu %}{% endblock %}
+
+<div class="page-header">
+    <div class="header-title">
+        {% block header_title %}{% endblock %}
+    </div>
+    <div class="header-controls">
+        <div class="header-greetings">Hello Anon!</div>
+        <div class="header-button">
+            <a href="" class="btn btn-primary">Log In</a>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     {% block content %}{% endblock %}
 </div>

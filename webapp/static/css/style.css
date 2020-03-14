@@ -66,6 +66,7 @@
     display: flex;
     align-items: center;
     width: 10%;
+    justify-content: center;
 }
 
 .file-date {
@@ -74,6 +75,31 @@
 }
 
 .file-download {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    background-color: #eee;
+    height: 3rem;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 1rem;
+}
+
+.detail-title {
+    font-weight: bold;
+}
+
+.detail-value {
+
+}
+
+.detail-actions {
     display: flex;
     justify-content: center;
     align-items: center;

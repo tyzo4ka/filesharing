@@ -4,15 +4,39 @@
 {% block header_title %}Details{% endblock %}
 
 {% block content %}
-    {% if file.author %}
-        <p>Author: {{ file.author.username }}</p>
-    {% else %}
-        <p>Author: Anonim</p>
-    {% endif %}
-    <p>{{ file.caption }}</p>
-    <p>{{ file.file.url }}</p>
-    <p>{{ file.access }}</p>
-    <p>{{ file.created_at|date:'d.m.Y H:i:s' }}</p>
+    <div class="detail-row">
+        <div class="detail-title">Title</div>
+        <div class="detail-value">{{ file.caption }}</div>
+    </div>
+    <div class="detail-row">
+        <div class="detail-title">Author</div>
+        <div class="detail-value">
+            {% if file.author %}
+                {{ file.author.username }}
+            {% else %}
+                Anonymous
+            {% endif %}
+        </div>
+    </div>
+    <div class="detail-row">
+        <div class="detail-title">link</div>
+        <div class="detail-value">{{ file.file.url }}</div>
+    </div>
+    <div class="detail-row">
+        <div class="detail-title">Availability</div>
+        <div class="detail-value">{{ file.access }}</div>
+    </div>
+    <div class="detail-row">
+        <div class="detail-title">Upload Date</div>
+        <div class="detail-value">{{ file.created_at|date:'d.m.Y H:i:s' }}</div>
+    </div>
+    <div class="detail-actions">
+        <a href="{{ file.file.url }}" class="btn btn-success mr-2">Download</a>
+        <a href="/file/{{ file.pk }}/update" class="btn btn-secondary mr-2">⚙</a>
+        <a href="/file/{{ file.pk }}/delete" class="btn btn-danger">☒</a>
+    </div>
 
 {% endblock %}
+
+
 
