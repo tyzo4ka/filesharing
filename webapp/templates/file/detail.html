@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Details{% endblock %}
-{% block content %}
 
+{% block title %}Details{% endblock %}
+{% block header_title %}Details{% endblock %}
+
+{% block content %}
     {% if file.author %}
         <p>Author: {{ file.author.username }}</p>
     {% else %}

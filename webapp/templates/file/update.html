@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Update Photo{% endblock %}
+
+{% block title %}Update File{% endblock %}
+{% block header_title %}Update File{% endblock %}
+
 {% block content %}
-    <div class="caption-confirmation">
-        <h1>Update Photo</h1>
-    </div>
     <div class="centered-buttons">
         <form method="POST" action="{% url "webapp:file_update" file.pk %}">
             {% include 'partial/form.html' with button_text="Update" %}

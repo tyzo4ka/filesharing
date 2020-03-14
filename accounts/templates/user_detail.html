@@ -4,8 +4,11 @@
 {% block content %}
     <h3 class="text-center">Username: {{ user_obj.username }}</h3>
     <div class="file-table">
+
         {% for file in user_obj.files.all %}
-            {% include 'partial/card.html' %}
+            {% if file.access == "Public" %}
+                {% include 'partial/card.html' %}
+            {% endif %}
         {% endfor %}
     </div>
 

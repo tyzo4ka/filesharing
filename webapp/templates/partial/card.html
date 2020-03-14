@@ -1,9 +1,11 @@
 <div class="file-card">
     <div class="file-info">
-        <div class="file-title">{{ file.caption }}</div>
+        <div class="file-title">
+            <a href="/file/{{ file.pk }}">{{ file.caption }}</a>
+        </div>
         <div class="file-author">
             {% if file.author %}
-                By: {{ file.author.username }}
+                By: <a href="/users/{{ file.author.username.pk }}">{{ file.author.username }}</a>
             {% else %}
                 By: Anonim
             {% endif %}

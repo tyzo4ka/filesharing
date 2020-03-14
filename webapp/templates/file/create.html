@@ -1,13 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Create Photo{% endblock %}
+
+{% block title %}Create File{% endblock %}
+{% block header_title %}Create File{% endblock %}
+
 {% block content %}
-    <div class="caption-confirmation">
-        <h1>Create Photo</h1>
-    </div>
     <div class="centered-buttons">
         <form method="POST" action="" enctype="multipart/form-data">
             {% include 'partial/form.html' with button_text='Create' %}
         </form>
     </div>
 {% endblock %}
-</html>

@@ -1,9 +1,30 @@
 .page-header {
     width: 100%;
-    height: 8rem;
+    height: 5rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
+    background-color: #252a44;
+    margin-bottom: 2rem;
+}
+
+.header-title {
+    font-size: 3rem;
+    color: white;
+    margin-left: 3rem;
+}
+
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 3rem;
+}
+
+.header-greetings {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-right: 1rem;
 }
 
 .file-card {
