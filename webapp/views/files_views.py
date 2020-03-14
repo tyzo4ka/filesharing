@@ -1,5 +1,6 @@
 from urllib.parse import urlencode
 
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -42,10 +43,18 @@ class FileCreate(CreateView):
         return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
 
 
-class FileUpdate(UpdateView):
+class FileUpdate(PermissionRequiredMixin, UpdateView):
     model = File
     template_name = 'file/update.html'
     fields = ['file', 'caption', 'access']
+    permission_required = "webapp.change_file"
+    permission_denied_message = "Permission denied"
+
+    def is_author(self):
+        return self.object.author == self.request.user
+
+    def has_permission(self):
+        return super().has_permission() or self.is_author()
 
     # def dispatch(self, request, *args, **kwargs):
     #     if not request.user.is_authenticated:
