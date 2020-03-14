@@ -1,0 +1,17 @@
+<div class="file-card">
+    <div class="file-info">
+        <div class="file-title">{{ file.caption }}</div>
+        <div class="file-author">
+            {% if file.author %}
+                By: {{ file.author.username }}
+            {% else %}
+                By: Anonim
+            {% endif %}
+        </div>
+        <div class="file-date">{{ file.created_at|date:'d.m.Y H:i:s' }}</div>
+    </div>
+    <div class="file-access">{{ file.access }}</div>
+    <div class="file-download">
+        <a href="{{ file.file.url }}" class="btn btn-success">Download</a>
+    </div>
+</div>

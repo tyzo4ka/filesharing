@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{#{% block title %}{{ photography.caption }}{% endblock %}#}
+{% block title %}Details{% endblock %}
 {% block content %}
 
     {% if file.author %}
         <p>Author: {{ file.author.username }}</p>
     {% else %}
-        <p>Author: anonim</p>
+        <p>Author: Anonim</p>
     {% endif %}
     <p>{{ file.caption }}</p>
     <p>{{ file.file.url }}</p>
@@ -13,4 +13,3 @@
     <p>{{ file.created_at|date:'d.m.Y H:i:s' }}</p>
 
 {% endblock %}
-
