@@ -44,28 +44,48 @@ class FileCreate(CreateView):
         return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
 
 
-class FileUpdate(UpdateView):
+# class FileUpdate(UpdateView):
+#     model = File
+#     template_name = 'file/update.html'
+#     fields = ['file', 'caption', 'access']
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         if not request.user.has_perm('webapp.change_file') or self.object.author != request.user.pk:
+#             raise PermissionDenied('403 Forbidden')
+#         return super().dispatch(request, *args, **kwargs)
+#
+#     def get_success_url(self):
+#         return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
+
+class FileUpdate(PermissionRequiredMixin, UpdateView):
     model = File
     template_name = 'file/update.html'
     fields = ['file', 'caption', 'access']
+    permission_required = "webapp.change_file"
+    permission_denied_message = "Permission denied"
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.has_perm('webapp.change_file') or self.object.author != request.user.pk:
-            raise PermissionDenied('403 Forbidden')
-        return super().dispatch(request, *args, **kwargs)
+    def is_author(self):
+        return self.get_object().author == self.request.user
+
+    def has_permission(self):
+        return super().has_permission() or self.is_author()
 
     def get_success_url(self):
         return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
 
 
-class FileDelete(DeleteView):
+class FileDelete(PermissionRequiredMixin, DeleteView):
     model = File
     template_name = "file/delete.html"
     success_url = reverse_lazy('webapp:index')
+    permission_required = "webapp.delete_file"
+    permission_denied_message = "Permission denied"
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            raise PermissionDenied('403 Forbidden')
-        if not request.user.has_perm('webapp.delete_photography') or self.object.author != request.user:
-            raise PermissionDenied('403 Forbidden')
-        return super().dispatch(request, *args, **kwargs)
+    def is_author(self):
+        return self.get_object().author == self.request.user
+
+    def has_permission(self):
+        return super().has_permission() or self.is_author()
+
+    def get_success_url(self):
+        return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
