@@ -2,12 +2,11 @@
 {% block title %}{{ user_obj.username }}{% endblock %}
 
 {% block content %}
-    <h1>Username: {{ user_obj.username }}</h1>
-    {% for file in user_obj.files.all %}
-        <p>{{ file.caption }}</p>
-            <p>{{ file.file.url }}</p>
-            <p>{{ file.access}}</p>
-            <p>{{ file.created_at|date:'d.m.Y H:i:s' }}</p>
-    {% endfor %}
+    <h3 class="text-center">Username: {{ user_obj.username }}</h3>
+    <div class="file-table">
+        {% for file in user_obj.files.all %}
+            {% include 'partial/card.html' %}
+        {% endfor %}
+    </div>
 
 {% endblock %}
