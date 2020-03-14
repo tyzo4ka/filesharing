@@ -18,4 +18,4 @@ class File(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created date")
 
     def __str__(self):
-        return f'{self.author.username} {self.caption[:10]}'
+        return f'{self.caption[:10]}'
