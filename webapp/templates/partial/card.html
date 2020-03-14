@@ -17,7 +17,10 @@
         <a href="{{ file.file.url }}" class="btn btn-success mr-2">Download</a>
         {% if perms.webapp.change_file or request.user == file.author%}
             <a href="{% url 'webapp:file_update' file.pk %}" class="btn btn-secondary mr-2">⚙</a>
+        {% endif %}
+        {% if perms.webapp.delete_file or request.user == file.author%}
             <a href="{% url 'webapp:file_delete' file.pk %}" class="btn btn-danger">☒</a>
         {% endif %}
     </div>
 </div>
+
