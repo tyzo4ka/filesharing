@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "webapp",
     "widget_tweaks",
     "accounts",
+    "api"
 ]
 
 MIDDLEWARE = [

@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+
 {% block title %}{{ user_obj.username }}{% endblock %}
+{% block header_title %}Details: {{ user_obj.username }}{% endblock %}
 
 {% block content %}
-    <h3 class="text-center">Username: {{ user_obj.username }}</h3>
+{#    <h3 class="text-center">Username: {{ user_obj.username }}</h3>#}
     <div class="file-table">
         {% for file in user_obj.files.all|dictsortreversed:'created_at' %}
+
             {% if file.access == "Public" or request.user == file.author %}
                 {% include 'partial/card.html' %}
             {% endif %}
