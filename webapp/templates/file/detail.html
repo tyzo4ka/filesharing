@@ -32,8 +32,8 @@
     </div>
     <div class="detail-actions">
         <a href="{{ file.file.url }}" class="btn btn-success mr-2">Download</a>
-        <a href="/file/{{ file.pk }}/update" class="btn btn-secondary mr-2">⚙</a>
-        <a href="/file/{{ file.pk }}/delete" class="btn btn-danger">☒</a>
+        <a href="{% url 'webapp:file_update' file.pk %}" class="btn btn-secondary mr-2">⚙</a>
+        <a href="{% url 'webapp:file_delete' file.pk %}" class="btn btn-danger">☒</a>
     </div>
 
 {% endblock %}

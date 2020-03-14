@@ -5,7 +5,7 @@
         </div>
         <div class="file-author">
             {% if file.author %}
-                By: <a href="/users/{{ file.author.username.pk }}">{{ file.author.username }}</a>
+                By: <a href="{% url 'accounts:user_detail' file.author.pk %}">{{ file.author.username }}</a>
             {% else %}
                 By: Anonim
             {% endif %}
@@ -15,7 +15,9 @@
     <div class="file-access">{{ file.access }}</div>
     <div class="file-download">
         <a href="{{ file.file.url }}" class="btn btn-success mr-2">Download</a>
-        <a href="/file/{{ file.pk }}/update" class="btn btn-secondary mr-2">⚙</a>
-        <a href="/file/{{ file.pk }}/delete" class="btn btn-danger">☒</a>
+        {% if perms.webapp.change_file or request.user == file.author%}
+            <a href="{% url 'webapp:file_update' file.pk %}" class="btn btn-secondary mr-2">⚙</a>
+            <a href="{% url 'webapp:file_delete' file.pk %}" class="btn btn-danger">☒</a>
+        {% endif %}
     </div>
 </div>
