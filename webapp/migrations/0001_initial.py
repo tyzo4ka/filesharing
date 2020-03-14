@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='File',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file', models.FileField(upload_to='images', verbose_name='File')),
+                ('file', models.FileField(upload_to='files', verbose_name='File')),
                 ('caption', models.CharField(max_length=50, verbose_name='Caption')),
                 ('access', models.CharField(choices=[('0', 'Public'), ('1', 'Hidden'), ('2', 'Private')], default='0', max_length=20, verbose_name='Access')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created date')),

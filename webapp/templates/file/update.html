@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Update Photo{% endblock %}
+{% block content %}
+    <div class="caption-confirmation">
+        <h1>Update Photo</h1>
+    </div>
+    <div class="centered-buttons">
+        <form method="POST" action="{% url "webapp:file_update" file.pk %}">
+            {% include 'partial/form.html' with button_text="Update" %}
+        </form>
+    </div>
+{% endblock %}

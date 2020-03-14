@@ -8,5 +8,4 @@ class FileAdmin(admin.ModelAdmin):
     exclude = []
     readonly_fields = ['created_at']
 
-
 admin.site.register(File, FileAdmin)

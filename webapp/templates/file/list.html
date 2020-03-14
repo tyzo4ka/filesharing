@@ -7,6 +7,8 @@
 {#{% endblock %}#}
 {% block content %}
     <h1 class="text-center">Files</h1>
+    {% include 'partial/search.html' %}
+
     {% if is_paginated %}
             {% include 'partial/pagination.html' %}
     {% endif %}
