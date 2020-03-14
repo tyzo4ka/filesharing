@@ -62,3 +62,10 @@ class FileDelete(DeleteView):
     model = File
     template_name = "file/delete.html"
     success_url = reverse_lazy('webapp:index')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            raise PermissionDenied('403 Forbidden')
+        if not request.user.has_perm('webapp.delete_photography') or self.object.author != request.user:
+            raise PermissionDenied('403 Forbidden')
+        return super().dispatch(request, *args, **kwargs)
