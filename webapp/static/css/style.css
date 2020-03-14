@@ -43,6 +43,17 @@
     background-color: #ddd;
 }
 
+.list-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.list-adding {
+    margin-right: 1rem;
+}
+
 .file-info {
     display: flex;
     width: 70%;

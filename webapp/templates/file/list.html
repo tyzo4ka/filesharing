@@ -4,7 +4,15 @@
 {% block header_title %}All Files{% endblock %}
 
 {% block content %}
-    {% include 'partial/search.html' %}
+    <div class="list-actions">
+        <div class="list-search">
+            {% include 'partial/search.html' %}
+        </div>
+        <div class="list-adding">
+            <a href="{% url 'webapp:file_create' %}" class="btn btn-success">⊕ Add File</a>
+        </div>
+    </div>
+
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
