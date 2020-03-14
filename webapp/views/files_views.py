@@ -13,10 +13,11 @@ from webapp.forms import FileSearchForm
 
 
 class IndexView(SearchFilesView):
+    queryset = File.objects.filter(access="Public")
     model = File
     template_name = 'file/list.html'
     ordering = ['-created_at']
-    paginate_by = 5
+    paginate_by = 10
     paginate_orphans = 2
     search_form = FileSearchForm
 
@@ -38,6 +39,8 @@ class FileCreate(CreateView):
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.save()
+        access = form.cleaned_data['access']
+        print("Accesss", access)
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):

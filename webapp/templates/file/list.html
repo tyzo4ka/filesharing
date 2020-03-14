@@ -9,13 +9,16 @@
     <div class="page-header">
         <h1 class="text-center">Files</h1>
     </div>
+    {% include 'partial/search.html' %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
 
     <div class="file-table">
             {% for file in file_list %}
-                {% include 'partial/card.html' %}
+                {% if file.access == "Public" %}
+                    {% include 'partial/card.html' %}
+                {% endif %}
             {% endfor %}
     </div>
 
