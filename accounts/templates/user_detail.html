@@ -4,7 +4,7 @@
 {% block content %}
     <h3 class="text-center">Username: {{ user_obj.username }}</h3>
     <div class="file-table">
-        {% for file in user_obj.files.all %}
+        {% for file in user_obj.files.all|dictsortreversed:'created_at' %}
             {% if file.access == "Public" or request.user == file.author %}
                 {% include 'partial/card.html' %}
             {% endif %}

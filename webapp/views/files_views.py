@@ -87,4 +87,4 @@ class FileDelete(PermissionRequiredMixin, DeleteView):
         return super().has_permission() or self.is_author()
 
     def get_success_url(self):
-        return reverse('webapp:file_detail', kwargs={'pk': self.object.pk})
+        return reverse('webapp:index')
